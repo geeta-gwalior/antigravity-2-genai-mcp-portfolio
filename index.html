@@ -188,33 +188,47 @@ Do not start a server.
 
       </google-codelab-step>
     
-      <google-codelab-step label="Set up the GitHub MCP server" duration="1">
-        <p>Inside your <code>antigravity-portfolio</code> folder, create the config folder and file:</p>
-<pre><code language="language-bash" class="language-bash">mkdir .agents
-</code></pre>
-<p>Create a <strong>GitHub Personal Access Token</strong> first (classic, with <code>repo</code> scope) at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>, and keep it copied.</p>
-<p>Then create <code>.agents/mcp_config.json</code> (Notepad on Windows is fine) with this content, replacing the placeholder:</p>
-<pre><code language="language-json" class="language-json">{
-  &#34;mcpServers&#34;: {
-    &#34;github&#34;: {
-      &#34;command&#34;: &#34;npx&#34;,
-      &#34;args&#34;: [&#34;-y&#34;, &#34;@modelcontextprotocol/server-github&#34;],
-      &#34;env&#34;: {
-        &#34;GITHUB_PERSONAL_ACCESS_TOKEN&#34;: &#34;YOUR_GITHUB_TOKEN_HERE&#34;
-      }
-    }
-  }
-}
-</code></pre>
-<p>Negative : Never commit this file with a real token inside it. Before pushing anything, add <code>.agents/mcp_config.json</code> to a <code>.gitignore</code> file in this folder.</p>
-<p>Restart <code>agy</code> inside this folder and confirm the server loaded:</p>
-<pre><code language="language-bash" class="language-bash">cd ~/antigravity-portfolio
-agy
-</code></pre>
-<pre><code>/mcp
-</code></pre>
-<p>You should see <code>github</code> listed as an active server with its tools. The first time the agent actually uses one of these tools, Antigravity will ask you to approve it — allow it.</p>
+      <google-codelab-step label="Set up the GitHub MCP server" duration="2">
+        <p><strong>Important:</strong> The easiest way to connect GitHub MCP in Antigravity IDE is through the built-in UI — no need to manually edit JSON files.</p>
 
+<h2>Step 1 — Install Docker (Required)</h2>
+<p>Negative : Docker is <strong>required</strong> for the GitHub MCP server to run. Without it, the server will fail to start. Install Docker Desktop before proceeding:</p>
+<ul>
+<li>Download from <a href="https://www.docker.com/products/docker-desktop/" target="_blank">docker.com/products/docker-desktop</a></li>
+<li>Install and launch Docker Desktop</li>
+<li>Make sure Docker is <strong>running</strong> (the whale icon should appear in your taskbar/menu bar)</li>
+</ul>
+
+<h2>Step 2 — Create a GitHub Access Token</h2>
+<p>Go to your GitHub account settings and create a Personal Access Token:</p>
+<ol type="1">
+<li>Open <a href="https://github.com/settings/apps" target="_blank">github.com/settings/apps</a> → <strong>Personal access tokens</strong></li>
+<li>Click <strong>Generate new token (classic)</strong></li>
+<li>Give it a name (e.g. <code>antigravity-mcp</code>)</li>
+<li>Select the <code>repo</code> scope (full repository access)</li>
+<li>Click <strong>Generate token</strong> and <strong>copy it immediately</strong> — you won&#39;t see it again</li>
+</ol>
+<p>Negative : Never share or commit your token anywhere. Treat it like a password.</p>
+
+<h2>Step 3 — Add GitHub MCP via Antigravity IDE</h2>
+<p>In the <strong>Antigravity IDE</strong>, connect GitHub MCP directly from the UI — no config file editing needed:</p>
+<ol type="1">
+<li>In the Antigravity IDE sidebar or chat panel, click the <strong>MCP Servers</strong> button (plug icon)</li>
+<li>Click <strong>Add MCP Server</strong></li>
+<li>From the list, choose <strong>GitHub</strong></li>
+<li>Paste your Personal Access Token when prompted</li>
+<li>Click <strong>Connect</strong></li>
+</ol>
+<p>Positive : Antigravity IDE registers the GitHub MCP server automatically in the background. You don&#39;t need to touch any <code>mcp_config.json</code> file manually when using the IDE.</p>
+
+<h2>Step 4 — Verify the connection</h2>
+<p>Once connected, you should see <code>github</code> listed as an active MCP server in the IDE. The first time you ask the agent to perform a GitHub action, it will ask for your approval — allow it.</p>
+<p>You can now ask the agent things like:</p>
+<ul>
+<li><em>"Create a new public GitHub repository called my-portfolio-site"</em></li>
+<li><em>"Push all files in this folder as the initial commit"</em></li>
+<li><em>"Create a new branch and open a pull request"</em></li>
+</ul>
 
       </google-codelab-step>
     
