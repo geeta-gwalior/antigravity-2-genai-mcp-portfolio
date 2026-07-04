@@ -1,0 +1,290 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Build a Real Portfolio Site with Antigravity 2.0 and GitHub MCP</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="antigravity-2-genai-mcp-portfolio"
+                  title="Build a Real Portfolio Site with Antigravity 2.0 and GitHub MCP"
+                  environment="web"
+                  feedback-link="https://github.com/geetakakrani">
+    
+      <google-codelab-step label="About the Author" duration="1">
+        <p><strong>Geeta Kakrani</strong> — AI Consultant, Google Developer Expert (AI/ML &amp; TPU).</p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/geetakakrani" target="_blank">linkedin.com/in/geetakakrani</a></p>
+<p>Positive : No prior AI or agent experience needed for this codelab — we&#39;ll build the concepts up from scratch before writing any commands.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="What is Generative AI?" duration="1">
+        <p>Old-style AI could only <strong>sort or predict</strong> things that already exist — &#34;is this email spam or not,&#34; &#34;will this customer cancel or not.&#34; It picked from options you gave it.</p>
+<p><strong>Generative AI creates something brand new that didn&#39;t exist before</strong> — text, images, code, audio, video — just from a plain description you type in.</p>
+<p>Think of it like this: a calculator can only compute numbers you give it. Generative AI is like an artist who, when you say &#34;paint me a sunset over mountains,&#34; actually paints a new picture — one that never existed before — based on everything it has learned from millions of other paintings.</p>
+<p><strong>Simple everyday examples:</strong></p>
+<ul>
+<li>You type &#34;Write a birthday message for my mother&#34; → Gemini/ChatGPT writes a fresh message for you</li>
+<li>You type &#34;Draw a cat wearing a spacesuit&#34; → an image tool like Midjourney creates a picture</li>
+<li>You type &#34;Write me a Python function to add two numbers&#34; → GitHub Copilot writes the actual code</li>
+</ul>
+<p>Large Language Models (LLMs) like Gemini, GPT, and Claude are the text-and-code branch of generative AI. Under the hood, they work like a very advanced autocomplete — predicting the next most likely word, over and over, based on patterns learned from huge amounts of text.</p>
+<p>Negative : Generative AI <strong>predicts</strong>, it doesn&#39;t truly &#34;understand&#34; like a human does. It can sometimes confidently produce something wrong (called a &#34;hallucination&#34;) — always double-check important facts it gives you.</p>
+<p>This idea — describing what you want in plain language and getting real output back — is the foundation everything else in this codelab builds on.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="What is Agentic AI?" duration="1">
+        <p>Generative AI on its own just <strong>answers and stops</strong>. You ask, it replies, done. If you want the next step done, you have to ask again and do the work yourself.</p>
+<p><strong>Agentic AI takes it further — it doesn&#39;t just answer, it acts</strong>, running in a loop until the actual goal is finished:</p>
+<ol type="1">
+<li><strong>Plan</strong> — break the goal into steps</li>
+<li><strong>Act</strong> — use a real tool (write a file, run a command, search the web, call an API)</li>
+<li><strong>Observe</strong> — check whether that step worked</li>
+<li><strong>Repeat</strong> — keep going, and fix its own mistakes, until the goal is actually done</li>
+</ol>
+<p><strong>A simple everyday example:</strong></p>
+<ul>
+<li>Generative AI: you ask &#34;what should a good grocery list for a birthday party look like?&#34; — it writes you a list, and stops. You still have to go buy everything yourself.</li>
+<li>Agentic AI: you say &#34;order everything needed for my daughter&#39;s birthday party&#34; — the agent checks what you already have, decides what&#39;s missing, actually places the order, and confirms once it&#39;s done.</li>
+</ul>
+<p><strong>A coding example (what we&#39;ll do today):</strong></p>
+<ul>
+<li>Generative AI: you ask &#34;what would the code for a portfolio website look like?&#34; — it shows you code in the chat, and you&#39;d have to copy it into files yourself.</li>
+<li>Agentic AI (Antigravity): you say &#34;build me a portfolio website&#34; — the agent actually creates the real <code>index.html</code>, <code>styles.css</code>, and <code>script.js</code> files on your computer, checks that they work, and tells you when it&#39;s done.</li>
+</ul>
+<p>Negative : An agent is not magic — it still makes mistakes sometimes. The value is that it handles the repetitive typing and file-juggling, while you stay in charge of reviewing what it did.</p>
+<p><strong>Antigravity 2.0</strong> is Google&#39;s dedicated platform for exactly this — a place to run these goal-driven agents, in parallel, from your desktop, terminal, or your own code.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="What is Antigravity 2.0 — and how is it different?" duration="1">
+        <p>If you&#39;ve used <strong>Gemini CLI</strong> before, here&#39;s what changed with Antigravity 2.0:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Feature</p>
+</td><td colspan="1" rowspan="1"><p>Gemini CLI (old)</p>
+</td><td colspan="1" rowspan="1"><p>Antigravity 2.0</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Interface</p>
+</td><td colspan="1" rowspan="1"><p>Terminal only</p>
+</td><td colspan="1" rowspan="1"><p>Desktop App + CLI + SDK</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Agent model</p>
+</td><td colspan="1" rowspan="1"><p>Single agent</p>
+</td><td colspan="1" rowspan="1"><p>Parallel multi-agent</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Plugins</p>
+</td><td colspan="1" rowspan="1"><p>Extensions</p>
+</td><td colspan="1" rowspan="1"><p>Antigravity Plugins</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Status (mid-2026)</p>
+</td><td colspan="1" rowspan="1"><p>Retired for consumers</p>
+</td><td colspan="1" rowspan="1"><p>Active</p>
+</td></tr>
+</table>
+<p>Negative : Gemini CLI was retired for consumer accounts (free, Pro, Ultra) on <strong>June 18, 2026</strong>. If you have old <code>gemini</code> command workflows, this codelab&#39;s <code>agy</code> commands are the replacement.</p>
+<p>Antigravity 2.0 isn&#39;t one single tool — it&#39;s an ecosystem with <strong>three surfaces that all share the same underlying agent</strong>, so an improvement to the agent reaches all three at once:</p>
+<ul>
+<li><strong>Antigravity 2.0 (Desktop App)</strong> — your mission control. Launch multiple agents in parallel, schedule background tasks. Not a code editor by itself.</li>
+<li><strong>Antigravity IDE</strong> — a full VS Code–style editor with the same agent built in, for when you want to code alongside the agent directly.</li>
+<li><strong>Antigravity CLI (</strong><strong><code>agy</code></strong><strong>)</strong> — the terminal version. Everything the Desktop App can do, from your command line. This is what we&#39;ll use today.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Install the Antigravity CLI (agy)" duration="1">
+        <p><code>agy</code> is a Go binary — install it with Google&#39;s official installer script. There is no npm package for it.</p>
+<p><strong>macOS / Linux</strong></p>
+<pre><code language="language-bash" class="language-bash">curl -fsSL https://antigravity.google/cli/install.sh | bash
+</code></pre>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code language="language-bash" class="language-bash">irm https://antigravity.google/cli/install.ps1 | iex
+</code></pre>
+<p><strong>Windows (cmd.exe) — alternative</strong></p>
+<pre><code language="language-bash" class="language-bash">curl -fsSL https://antigravity.google/cli/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd
+</code></pre>
+<p>Reference: <a href="https://antigravity.google/docs/cli-install" target="_blank">antigravity.google/docs/cli-install</a></p>
+<p>Verify and authenticate:</p>
+<pre><code language="language-bash" class="language-bash">agy --version
+agy
+</code></pre>
+<p>Negative : If <code>agy --version</code> says &#34;command not found&#34; right after installing, close and reopen your terminal — the installer updates your PATH, which only takes effect in a fresh terminal window.</p>
+<p>On first run, <code>agy</code> opens a browser tab — sign in with your personal Gmail (not corporate/school). You&#39;ll land here:</p>
+<pre><code>◆ Welcome to Antigravity CLI
+  Authenticated as: yourname@gmail.com
+  Model: gemini-3.5-flash
+  Type /help for commands
+&gt;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Build a real portfolio website" duration="1">
+        <p><strong>macOS / Linux</strong></p>
+<pre><code language="language-bash" class="language-bash">mkdir -p ~/antigravity-portfolio
+cd ~/antigravity-portfolio
+agy
+</code></pre>
+<p><strong>Windows</strong></p>
+<pre><code language="language-bash" class="language-bash">mkdir antigravity-portfolio
+cd antigravity-portfolio
+agy
+</code></pre>
+<p>At the <code>agy</code> prompt, describe the outcome — this is called <strong>vibe coding</strong>: you state intent, the agent handles implementation.</p>
+<pre><code>Create a personal portfolio website for me.
+Requirements:
+- Separate index.html, styles.css, and script.js files
+- Sections: Hero with name and title, About, Skills (as tags), Projects (3 sample cards), Contact
+- Dark theme with one accent color, responsive layout using CSS Flexbox/Grid
+- Add a working &#34;scroll to section&#34; nav bar
+Do not start a server.
+</code></pre>
+<p>Watch <code>agy</code> plan the file structure, write each file, and report what it created — this is a real, working site, not a placeholder.</p>
+<p>Preview it locally. Exit with <code>Ctrl+C</code>, then:</p>
+<pre><code language="language-bash" class="language-bash">python3 -m http.server 8080
+</code></pre>
+<p>Negative : On Windows, <code>python3</code> is often not recognised — the installer usually only registers <code>python</code>. If you get a &#34;not found&#34; error, run <code>python -m http.server 8080</code> instead.</p>
+<p>Open <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> and check your portfolio site loads and the nav bar scrolls correctly.</p>
+<p>Positive : Ask <code>agy</code> to tweak anything you don&#39;t like in plain English — &#34;make the accent color teal instead&#34; or &#34;make the Projects cards clickable.&#34; It edits the existing files rather than starting over.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="What is MCP?" duration="1">
+        <p><strong>MCP (Model Context Protocol)</strong> is an open standard that lets your agent securely call tools exposed by an external server — instead of you writing custom integration code for every service you want it to talk to.</p>
+<p><strong>Simple analogy:</strong> think of MCP like a universal charging cable. Before USB-C, every phone had its own different charger — one cable per brand, per socket. USB-C became one standard plug that just works everywhere. MCP does the same thing for AI agents — instead of writing separate custom code to connect your agent to GitHub, Google Drive, a database, or Slack, each of those services just plugs into your agent the same standard way, through an MCP server.</p>
+<p>Without MCP, if you wanted your agent to push code to GitHub, you&#39;d have to script the GitHub API calls yourself. With MCP, you point <code>agy</code> at a <strong>GitHub MCP server</strong>, and the agent can call tools like <code>create_repository</code>, <code>push_files</code>, and <code>create_issue</code> directly from a plain-English request.</p>
+<p>Antigravity CLI, the Desktop App, and the IDE all read MCP servers from the same config, so a server you set up once works everywhere:</p>
+<ul>
+<li>Global (every project): <code>~/.gemini/config/mcp_config.json</code></li>
+<li>Per-project (this workspace only): <code>.agents/mcp_config.json</code></li>
+</ul>
+<p>We&#39;ll use the per-project file so it only applies to this portfolio folder.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Set up the GitHub MCP server" duration="1">
+        <p>Inside your <code>antigravity-portfolio</code> folder, create the config folder and file:</p>
+<pre><code language="language-bash" class="language-bash">mkdir .agents
+</code></pre>
+<p>Create a <strong>GitHub Personal Access Token</strong> first (classic, with <code>repo</code> scope) at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>, and keep it copied.</p>
+<p>Then create <code>.agents/mcp_config.json</code> (Notepad on Windows is fine) with this content, replacing the placeholder:</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;mcpServers&#34;: {
+    &#34;github&#34;: {
+      &#34;command&#34;: &#34;npx&#34;,
+      &#34;args&#34;: [&#34;-y&#34;, &#34;@modelcontextprotocol/server-github&#34;],
+      &#34;env&#34;: {
+        &#34;GITHUB_PERSONAL_ACCESS_TOKEN&#34;: &#34;YOUR_GITHUB_TOKEN_HERE&#34;
+      }
+    }
+  }
+}
+</code></pre>
+<p>Negative : Never commit this file with a real token inside it. Before pushing anything, add <code>.agents/mcp_config.json</code> to a <code>.gitignore</code> file in this folder.</p>
+<p>Restart <code>agy</code> inside this folder and confirm the server loaded:</p>
+<pre><code language="language-bash" class="language-bash">cd ~/antigravity-portfolio
+agy
+</code></pre>
+<pre><code>/mcp
+</code></pre>
+<p>You should see <code>github</code> listed as an active server with its tools. The first time the agent actually uses one of these tools, Antigravity will ask you to approve it — allow it.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Push your site to GitHub with a simple prompt" duration="1">
+        <p>Now, still inside the same <code>agy</code> session, ask for the whole thing in plain English:</p>
+<pre><code>Create a new public GitHub repository called &#34;my-portfolio-site&#34; under my account.
+Push all the files in this folder to it as the initial commit.
+Use the commit message &#34;Initial portfolio site built with Antigravity&#34;.
+</code></pre>
+<p>Watch <code>agy</code>:</p>
+<ol type="1">
+<li>Call the GitHub MCP server to create the repository</li>
+<li>Initialize git locally if needed and stage your files</li>
+<li>Push the commit</li>
+<li>Report back the repository URL</li>
+</ol>
+<p>Open the URL it gives you — your portfolio site&#39;s code is now live on GitHub, and you never typed a single <code>git</code> or <code>gh</code> command by hand.</p>
+<p>Positive : From here, any future change is the same pattern: edit the site by describing what you want, then say &#34;commit and push this with an appropriate message&#34; — the agent handles git entirely through the MCP connection.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Recap" duration="1">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>Concept</p>
+</td><td colspan="1" rowspan="1"><p>What it means</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Generative AI</p>
+</td><td colspan="1" rowspan="1"><p>Models that create new content, not just classify it</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Agentic AI</p>
+</td><td colspan="1" rowspan="1"><p>An AI that plans, uses tools, and acts toward a goal on its own</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Antigravity 2.0</p>
+</td><td colspan="1" rowspan="1"><p>Google&#39;s agent platform — Desktop App, IDE, and CLI sharing one agent</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>agy</code></p>
+</td><td colspan="1" rowspan="1"><p>The terminal surface of Antigravity 2.0</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Vibe coding</p>
+</td><td colspan="1" rowspan="1"><p>Describing the outcome you want; the agent writes the implementation</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>MCP</p>
+</td><td colspan="1" rowspan="1"><p>An open protocol exposing external tools (like GitHub) to your agent</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>mcp_config.json</code></p>
+</td><td colspan="1" rowspan="1"><p>Where MCP servers are registered — globally or per project</p>
+</td></tr>
+</table>
+<p>Negative : Antigravity is a fast-changing, recently launched product (May 2026). Command names and config paths may shift — do a quick dry run a day or two before presenting this live.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="What&#39;s next" duration="1">
+        <ul>
+<li>Antigravity docs: <a href="https://antigravity.google/docs" target="_blank">antigravity.google/docs</a></li>
+<li>CLI install &amp; reference: <a href="https://antigravity.google/docs/cli-install" target="_blank">antigravity.google/docs/cli-install</a></li>
+<li>Explore more official MCP servers (Google Workspace, Google Developer Knowledge, and others) in the Antigravity docs</li>
+<li>Author&#39;s LinkedIn: <a href="https://www.linkedin.com/in/geetakakrani" target="_blank">linkedin.com/in/geetakakrani</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

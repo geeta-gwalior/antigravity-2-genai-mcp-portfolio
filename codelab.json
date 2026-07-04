@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2026-07-04T20:46:37+05:30",
+  "id": "antigravity-2-genai-mcp-portfolio",
+  "duration": 11,
+  "title": "Build a Real Portfolio Site with Antigravity 2.0 and GitHub MCP",
+  "authors": "Geeta Kakrani",
+  "summary": "Learn Antigravity 2.0 — from core AI concepts to building a real portfolio site and pushing it to GitHub using an MCP server.",
+  "source": "antigravity_2.0.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "ai",
+    "agents"
+  ],
+  "tags": [
+    "agentic-ai",
+    "antigravity",
+    "genai",
+    "mcp"
+  ],
+  "feedback": "https://github.com/geetakakrani",
+  "url": "antigravity-2-genai-mcp-portfolio"
+}
